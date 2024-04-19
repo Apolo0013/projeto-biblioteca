@@ -12,9 +12,6 @@ def linha():
     print('_' * 50)
 
 
-
-
-
 # Adicionar livro à biblioteca
 #auto título, categoria
 def addLivro():
@@ -211,11 +208,15 @@ def Empréstimo_e_devolução():
     print('3 - Ver livros emprestado')
     linha()
     while True:
-        escolher = int(input('Escolher: '))
-        linha()
-        if escolher in (1,2,3):
+        try:
+            escolher = int(input('Escolher: '))
+            linha()
+        except ValueError as error:
+            print(f'\033[mNão aceitamos str so numeros inteiros: Error {error.__class__}\033[m')
+        except Exception.__class__ as error:
+            print(f'Alem do valor errado vermos que deu outros erro: {error}')
+        else:
             break
-        print('\033[mApenas 1,2 e 3!!!\033[m')
     banco = banco_de_dados()
     nomes = ['autor' , 'titulo' , 'categoria' , 'ID']
 

@@ -26,10 +26,12 @@ def geradorID():
 
 # banco de dados em apenas em uma funcao
 def banco_de_dados(banco = 'livros'):
-    cursor.execute(f'SELECT * FROM {banco}')
-    banco_de_dados = cursor.fetchall()
-    return banco_de_dados
-
+    try:
+        cursor.execute(f'SELECT * FROM {banco}')
+        banco_de_dados = cursor.fetchall()
+        return banco_de_dados
+    except Exception.__class__ as error:
+        print(error)
 
 # add informacoes de um livro no sqlite
 def add_livros(autor , titulo , categoria , bancos , Id = True):
@@ -53,22 +55,24 @@ def aluga_livro(usuario , autor , titulo , categoria ,  Id):
 
 
 def deleta_info(Id , bancos = 'livros'):
-    cursor.execute(f'DELETE from {bancos} WHERE ID = {str(Id)}')
-    banco.commit()
-
+    try:
+        cursor.execute(f'DELETE from {bancos} WHERE ID = {str(Id)}')
+        banco.commit()
+    except Exception.__class__ as error:
+        print(error)
 
 # Criando o banco de dados
 banco = sqlite3.connect('dados_livros.db')
 
 cursor = banco.cursor()
-#cursor.execute('''CREATE TABLE livros (autor text,titulo text, categoria text, ID integer ''')
+#ursor.execute('''CREATE TABLE livros (autor text,titulo text, categoria text, ID integer) ''')
 
 #cursor.execute('''CREATE TABLE IF NOT EXISTS emprestimosEdevolucao (
-#                    usuario text,
+#                   usuario text,
 #                    autor text,
 #                    titulo text,
 #                    categoria text,
 #                    ID integer
 #                )''')
 
-    
+banco.commit()
